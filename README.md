@@ -1,6 +1,6 @@
 <h1 align="center">
   <img src="https://raw.githubusercontent.com/vernesong/OpenClash/dev/img/logo.png" alt="Clash" width="200">
-  <br>OpenClash<br>
+  <br>OpenClash-Mod<br>
 
 </h1>
 
@@ -12,30 +12,30 @@
   
 
 <p align="center">
-本插件是一个可运行在 OpenWrt 上的<a href="https://github.com/Dreamacro/clash" target="_blank"> Clash </a>客户端
+This plug-in is a plug-in that can run on OpenWrt<a href="https://github.com/Dreamacro/clash" target="_blank"> Clash </a>client
 </p>
 <p align="center">
-兼容 Shadowsocks、ShadowsocksR、Vmess、Trojan、Snell 等协议，根据灵活的规则配置实现策略代理
+Compatible with Shadowsocks, ShadowsocksR, Vmess, Trojan, Snell and other protocols, and implements policy proxying based on flexible rule configuration
 </p>
 <p align="center">
-- 感谢<a href="https://github.com/frainzy1477" target="_blank"> frainzy1477 </a>，本插件基于<a href="https://github.com/frainzy1477/luci-app-clash" target="_blank"> Luci For Clash </a>进行二次开发 -
+- Thanks to <a href="https://github.com/frainzy1477" target="_blank"> frainzy1477 </a>, this plug-in is based on <a href="https://github.com/frainzy1477/luci-app -clash" target="_blank"> Luci For Clash </a> for secondary development -
 </p>
 
-使用手册
+User manual
 ---
 
 
 * [Wiki](https://github.com/vernesong/OpenClash/wiki)
 
 
-下载地址
+Download address
 ---
 
 
-* IPK [前往下载](https://github.com/vernesong/OpenClash/releases)
+* IPK [Go to download](https://github.com/vernesong/OpenClash/releases)
 
 
-依赖
+rely
 ---
 
 * luci
@@ -57,26 +57,26 @@
 * kmod-ipt-nat(iptables)
 * iptables-mod-tproxy(iptables)
 * iptables-mod-extra(iptables)
-* kmod-tun(TUN模式)
+* kmod-tun (TUN mode)
 * luci-compat(Luci >= 19.07)
 * ip6tables-mod-nat(iptables-ipv6)
 * kmod-inet-diag(PROCESS-NAME)
 * kmod-nft-tproxy(Firewall4)
 
 
-编译
+compile
 ---
 
 
-从 OpenWrt 的 [SDK](https://archive.openwrt.org/chaos_calmer/15.05.1/ar71xx/generic/OpenWrt-SDK-15.05.1-ar71xx-generic_gcc-4.8-linaro_uClibc-0.9.33.2.Linux-x86_64.tar.bz2) 编译
+from OpenWrt of [SDK](https://archive.openwrt.org/chaos_calmer/15.05.1/ar71xx/generic/OpenWrt-SDK-15.05.1-ar71xx-generic_gcc-4.8-linaro_uClibc-0.9.33.2.Linux-x86_64.tar.bz2) compile
 ```bash
-# 解压下载好的 SDK
+# Unzip the downloaded SDK
 curl -SLk --connect-timeout 30 --retry 2 "https://archive.openwrt.org/chaos_calmer/15.05.1/ar71xx/generic/OpenWrt-SDK-15.05.1-ar71xx-generic_gcc-4.8-linaro_uClibc-0.9.33.2.Linux-x86_64.tar.bz2" -o "/tmp/SDK.tar.bz2"
 cd \tmp
 tar xjf SDK.tar.bz2
 cd OpenWrt-SDK-15.05.1-*
 
-# Clone 项目
+# Clone project
 mkdir package/luci-app-openclash
 cd package/luci-app-openclash
 git init
@@ -86,51 +86,51 @@ echo "luci-app-openclash" >> .git/info/sparse-checkout
 git pull --depth 1 origin master
 git branch --set-upstream-to=origin/master master
 
-# 编译 po2lmo (如果有po2lmo可跳过)
+# Compile po2lmo (skip if po2lmo is available)
 pushd luci-app-openclash/tools/po2lmo
 make && sudo make install
 popd
 
-# 开始编译
+# Start compiling
 
-# 先回退到SDK主目录
+# Go back to the SDK main directory first
 cd ../..
 make package/luci-app-openclash/luci-app-openclash/compile V=99
 
-# IPK文件位置
+# IPK file location
 ./bin/ar71xx/packages/base/luci-app-openclash_*-beta_all.ipk
 ```
 
 ```bash
-# 同步源码
+# Sync source code
 cd package/luci-app-openclash/luci-app-openclash
 git pull
 
-# 您也可以直接拷贝 `luci-app-openclash` 文件夹至其他 `OpenWrt` 项目的 `Package` 目录下随固件编译
+# You can also directly copy `luci-app-openclash` folder to other `OpenWrt` project `Package` Compiled with the firmware in the directory
 
 make menuconfig
-# 选择要编译的包 LuCI -> Applications -> luci-app-openclash
+# Select the package to compile LuCI -> Applications -> luci-app-openclash
 
 ```
 
 
-许可
+license
 ---
 
 
 * [MIT License](https://github.com/vernesong/OpenClash/blob/master/LICENSE)
-* 内核 [clash](https://github.com/Dreamacro/clash) by [Dreamacro](https://github.com/Dreamacro)
-* 本项目代码基于 [Luci For Clash](https://github.com/frainzy1477/luci-app-clash) by [frainzy1477](https://github.com/frainzy1477)
-* GEOIP数据库 [GeoLite2](https://dev.maxmind.com/geoip/geoip2/geolite2/) by [MaxMind](https://www.maxmind.com)
-* IP检查 [MyIP](https://github.com/SukkaW/MyIP) by [SukkaW](https://github.com/SukkaW)
-* 控制面板 [clash-dashboard](https://github.com/Dreamacro/clash-dashboard) by [Dreamacro](https://github.com/Dreamacro)
-* 控制面板 [yacd](https://github.com/haishanh/yacd) by [haishanh](https://github.com/haishanh)
-* lhie1规则 [lhie1-Rules](https://github.com/lhie1/Rules) by [lhie1](https://github.com/lhie1)
-* ConnersHua规则 [ConnersHua-Rules](https://github.com/ConnersHua/Profiles/tree/master) by [ConnersHua](https://github.com/ConnersHua)
-* 游戏规则 [SSTap-Rule](https://github.com/FQrabbit/SSTap-Rule) by [FQrabbit](https://github.com/FQrabbit)
-* 流媒体解锁检测 [RegionRestrictionCheck](https://github.com/lmc999/RegionRestrictionCheck) by [lmc999](https://github.com/lmc999)
+* Kernel [clash](https://github.com/Dreamacro/clash) by [Dreamacro](https://github.com/Dreamacro)
+* This project code is based on [Luci For Clash](https://github.com/frainzy1477/luci-app-clash) by [frainzy1477](https://github.com/frainzy1477)
+* GEOIP database [GeoLite2](https://dev.maxmind.com/geoip/geoip2/geolite2/) by [MaxMind](https://www.maxmind.com)
+* IP check [MyIP](https://github.com/SukkaW/MyIP) by [SukkaW](https://github.com/SukkaW)
+* control Panel [clash-dashboard](https://github.com/Dreamacro/clash-dashboard) by [Dreamacro](https://github.com/Dreamacro)
+* control Panel [yacd](https://github.com/haishanh/yacd) by [haishanh](https://github.com/haishanh)
+* lhie1 rules [lhie1-Rules](https://github.com/lhie1/Rules) by [lhie1](https://github.com/lhie1)
+* ConnersHua Rules [ConnersHua-Rules](https://github.com/ConnersHua/Profiles/tree/master) by [ConnersHua](https://github.com/ConnersHua)
+* game rules [SSTap-Rule](https://github.com/FQrabbit/SSTap-Rule) by [FQrabbit](https://github.com/FQrabbit)
+* Streaming Unlock Detection [RegionRestrictionCheck](https://github.com/lmc999/RegionRestrictionCheck) by [lmc999](https://github.com/lmc999)
 
-请作者喝杯咖啡
+Ask the author for a cup of coffee
 ---
 
 * PayPal
@@ -143,52 +143,52 @@ make menuconfig
     <img width="300" src="https://github.com/vernesong/OpenClash/raw/master/img/USDT-Wallet.png">
 </p>
 
-* 比特币-BTC
+* Bitcoin-BTC
 <p align="left">
     <img width="300" src="https://github.com/vernesong/OpenClash/raw/master/img/BTC-Wallet.png">
 </p>
 
-* 以太币-ETH
+* Ethereum-ETH
 <p align="left">
     <img width="300" src="https://github.com/vernesong/OpenClash/raw/master/img/ETH-Wallet.png">
 </p>
 
 
-预览
+Preview
 ---
 
 
-* 运行状态
+* Running status
 <p align="center">
     <img src="https://github.com/vernesong/OpenClash/raw/master/img/state.png">
 </p>
 
-* 全局设置
+* Global settings
 <p align="center">
     <img src="https://github.com/vernesong/OpenClash/raw/master/img/settings.png">
 </p>
 
-* 服务器&策略组
+* Server & Policy Group
 <p align="center">
     <img src="https://github.com/vernesong/OpenClash/raw/master/img/servers.png">
 </p>
 
-* 规则&策略组
+* Rules & Policy Group
 <p align="center">
     <img src="https://github.com/vernesong/OpenClash/raw/master/img/game-settings.png">
 </p>
 
-* 配置文件订阅
+* Profile subscription
 <p align="center">
     <img src="https://github.com/vernesong/OpenClash/raw/master/img/config-subscribe.png">
 </p>
 
-* 配置文件管理
+* Profile management
 <p align="center">
     <img src="https://github.com/vernesong/OpenClash/raw/master/img/config.png">
 </p>
 
-* 运行日志
+* Run log
 <p align="center">
     <img src="https://github.com/vernesong/OpenClash/raw/master/img/log.png">
 </p>
